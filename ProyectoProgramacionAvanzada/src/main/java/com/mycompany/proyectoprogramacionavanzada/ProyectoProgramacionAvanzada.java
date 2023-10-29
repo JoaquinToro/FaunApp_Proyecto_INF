@@ -6,7 +6,7 @@ package com.mycompany.proyectoprogramacionavanzada;
 
 /**
  *
- * @author Miles
+ * @author Joaquin
  */
 public class ProyectoProgramacionAvanzada {
 
