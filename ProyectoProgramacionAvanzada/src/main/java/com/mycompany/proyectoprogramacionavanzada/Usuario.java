@@ -15,6 +15,7 @@ public class Usuario {
     
     //atributos
     private String nombreDeUsuario;
+    private String password;
     private String genero;
     private int edad;
     private Scanner Entrada = new Scanner(System.in);
