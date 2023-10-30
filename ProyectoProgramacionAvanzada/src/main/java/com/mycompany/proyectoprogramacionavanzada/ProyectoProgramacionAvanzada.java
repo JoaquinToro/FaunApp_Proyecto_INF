@@ -27,6 +27,10 @@ public class ProyectoProgramacionAvanzada {
             System.out.println("0: Terminar 1:Agregar 2:Mostrar 3:Actualizar/Modificar 4:Eliminar");
           
             decision = entrada.nextInt();
+            if(decision == 0)
+            {
+                break;
+            }
             switch(decision){
                 case 1:
                     System.out.println("A que clase deseas agregar?");
