@@ -35,7 +35,7 @@ public class FaunaInfo extends Taxonomia{
         
     }
 
-    private FaunaInfo(){
+    public FaunaInfo(){
         super(null, null, null, null, null, null, null);
         this.faunaId = 0;
         this.nombreComun = null;
