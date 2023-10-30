@@ -110,11 +110,17 @@ public class FloraInfo extends Taxonomia {
     
     //Crear Datos
     public void crearDatos(){
+        System.out.println("Ingrese el id");
         this.floraId = Entrada.nextInt();
-        this.nombreComun = Entrada.next();
-        this.nombreCientifico = Entrada.next();
-        this.ubicacion = Entrada.next();
-        this.funcion = Entrada.next();
+        System.out.println("Ingrese el nombre comun");
+        this.nombreComun = Entrada.nextLine();
+        System.out.println("Ingrese el nombre cientifico");
+        this.nombreCientifico = Entrada.nextLine();
+        System.out.println("Ingrese la ubicacion");
+        this.ubicacion = Entrada.nextLine();
+        System.out.println("Ingrese la funcion");
+        this.funcion = Entrada.nextLine();
+        
         this.setDivision(Entrada.next());
         this.setSubdivision(Entrada.next());
         this.setClase(Entrada.next());
@@ -147,5 +153,37 @@ public class FloraInfo extends Taxonomia {
         System.out.println("Fin Información");
     }
     
+    public void mostrarFlora(){
+        int longitud = this.listaFlora.size();
+        
+        for(int i = 0; i<longitud; i++)
+            this.listaFlora.get(i).leerDatos();
+    }
+    public void mostrarFlora(ArrayList<FloraInfo> listaFlora){
+        int longitud = listaFlora.size();
+        
+        for(int i = 0; i<longitud; i++)
+            listaFlora.get(i).leerDatos();
+    }
+    public void Actualizar(int id){
+        int longitud = this.listaFlora.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaFlora.get(i).getFloraId() == id){
+                this.listaFlora.get(i).crearDatos();
+                return;
+            }
+        }
+    }
+    public void Eliminar(int id){
+        int longitud = this.listaFlora.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaFlora.get(i).getFloraId() == id){
+                this.listaFlora.remove(i);
+                return;
+            }
+        }
+    }    
 }
     
