@@ -96,7 +96,7 @@ public abstract class Taxonomia {
         this.especie = especie;
     }
     
-    public void crearDatos(){
+    public void crearDatosTaxonomia(){
         System.out.println("Escriba la division");
         this.division = Entrada.nextLine();
         System.out.println("Escriba la subdivision");
@@ -109,7 +109,7 @@ public abstract class Taxonomia {
         this.familia = Entrada.nextLine();
         System.out.println("Escriba el genero");
         this.genero = Entrada.nextLine();
-        System.out.println("Escriba la especia");
+        System.out.println("Escriba la especie");
         this.especie = Entrada.nextLine();
     }
     public void leerDatos(){
