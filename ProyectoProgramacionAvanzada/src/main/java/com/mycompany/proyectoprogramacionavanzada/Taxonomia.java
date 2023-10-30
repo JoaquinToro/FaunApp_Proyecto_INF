@@ -1,16 +1,15 @@
-import java.util.Scanner;
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
+package com.mycompany.proyectoprogramacionavanzada;
+import java.util.Scanner;
 /**
  *
  * @author usuario
  */
-abstract class Taxonomia {
+public abstract class Taxonomia {
+    //Atributos
     private String division;
     private String subdivision;
     private String clase;
