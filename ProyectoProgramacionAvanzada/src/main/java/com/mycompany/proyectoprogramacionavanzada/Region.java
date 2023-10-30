@@ -16,17 +16,30 @@ public class Region {
     //Atributos
     private int id;
     private String nombre;
-    private ArrayList<FloraInfo> FloraRegion = new ArrayList<>();
-    private ArrayList<FaunaInfo> FaunaRegion = new ArrayList<>();
+    private String descripcion;
+    private String clima;
+
     
     private Scanner Entrada = new Scanner(System.in);
     private ArrayList<Region> listaRegiones = new ArrayList<>();
     //Constructor
 
-    public Region(int id, String nombre) {
+    
+    public Region() {
+        this.id = 0;
+        this.nombre = null;
+        this.descripcion = null;
+        this.clima = null;
+    }
+    
+    public Region(int id, String nombre, String descripcion, String clima) {
         this.id = id;
         this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.clima = clima;
     }
+
+    
     
     //Getters
 
@@ -38,13 +51,15 @@ public class Region {
         return nombre;
     }
 
-    public ArrayList<FloraInfo> getFloraRegion() {
-        return FloraRegion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public ArrayList<FaunaInfo> getFaunaRegion() {
-        return FaunaRegion;
+    public String getClima() {
+        return clima;
     }
+    
+    
     
     //Setters
 
@@ -56,20 +71,23 @@ public class Region {
         this.nombre = nombre;
     }
 
-    public void setFloraRegion(ArrayList<FloraInfo> FloraRegion) {
-        this.FloraRegion = FloraRegion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public void setFaunaRegion(ArrayList<FaunaInfo> FaunaRegion) {
-        this.FaunaRegion = FaunaRegion;
+    public void setClima(String clima) {
+        this.clima = clima;
     }
+
+
     
     //Crear Datos
     public void crearDatos(){
         this.id = Entrada.nextInt();
-        this.nombre = Entrada.next();
-        
-        listaRegiones.add(new Region(this.id,this.nombre));
+        this.nombre = Entrada.nextLine();
+        this.descripcion = Entrada.nextLine();
+        this.clima = Entrada.nextLine();
+        listaRegiones.add(new Region(this.id,this.nombre,this.descripcion,this.clima));
     }
     
     //leer Datos
@@ -77,13 +95,41 @@ public class Region {
         System.out.println("Información General");
         System.out.println(this.id);
         System.out.println(this.nombre);
+        System.out.println(this.clima);
+        System.out.println(this.descripcion);
         
-        System.out.println("Información Flora En La Región");
-        for (int i = 0; i < FloraRegion.size(); i++) 
-            System.out.println(FloraRegion.get(i));
+    }
+
+    public void mostrarRegion(){
+        int longitud = this.listaRegiones.size();
         
-        System.out.println("Información Fauna En La Región");
-        for (int i = 0; i < FaunaRegion.size(); i++) 
-            System.out.println(FaunaRegion.get(i));
+        for(int i = 0; i<longitud; i++)
+            this.listaRegiones.get(i).leerDatos();
+    }
+    public void mostrarFlora(ArrayList<Region> listaRegiones){
+        int longitud = listaRegiones.size();
+        
+        for(int i = 0; i<longitud; i++)
+            listaRegiones.get(i).leerDatos();
+    }
+    public void Actualizar(int id){
+        int longitud = this.listaRegiones.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaRegiones.get(i).getId() == id){
+                this.listaRegiones.get(i).crearDatos();
+                return;
+            }
+        }
+    }
+    public void Eliminar(int id){
+        int longitud = this.listaRegiones.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaRegiones.get(i).getId() == id){
+                this.listaRegiones.remove(i);
+                return;
+            }
+        }
     }
 }
