@@ -116,12 +116,21 @@ public class FaunaInfo extends Taxonomia{
     //Crear Datos
     
     public void crearDatos(){
+        System.out.println("Ingrese el id");
         this.faunaId = Entrada.nextInt();
+        System.out.println("Ingrese el nombreComun");
         this.nombreComun = Entrada.next();
+        System.out.println("Ingrese el nombre Cientifico");
         this.nombreCientifico = Entrada.next();
+        System.out.println("Ingrese la ubicacion");
         this.ubicacion = Entrada.next();
+        System.out.println("Ingrese la alimentacion");
         this.alimentacion = Entrada.next();
+        System.out.println("Ingrese la peligrosidad");
         this.peligrosidad = Entrada.nextInt();
+        
+        
+        
         this.setDivision(Entrada.next());
         this.setSubdivision(Entrada.next());
         this.setClase(Entrada.next());
@@ -154,5 +163,37 @@ public class FaunaInfo extends Taxonomia{
         System.out.println(this.peligrosidad);
       
         System.out.println("Fin Información");
+    }
+    public void mostrarFauna(){
+        int longitud = this.listaFauna.size();
+        
+        for(int i = 0; i<longitud; i++)
+            this.listaFauna.get(i).leerDatos();
+    }
+    public void mostrarFauna(ArrayList<FaunaInfo> listaFauna){
+        int longitud = listaFauna.size();
+        
+        for(int i = 0; i<longitud; i++)
+            listaFauna.get(i).leerDatos();
+    }
+    public void Actualizar(int id){
+        int longitud = this.listaFauna.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaFauna.get(i).getFaunaId() == id){
+                this.listaFauna.get(i).crearDatos();
+                return;
+            }
+        }
+    }
+    public void Eliminar(int id){
+        int longitud = this.listaFauna.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaFauna.get(i).getFaunaId() == id){
+                this.listaFauna.remove(i);
+                return;
+            }
+        }
     }
 }
