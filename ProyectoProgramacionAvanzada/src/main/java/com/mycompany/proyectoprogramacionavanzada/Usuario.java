@@ -19,12 +19,20 @@ public class Usuario {
     private String genero;
     private int edad;
     private Scanner Entrada = new Scanner(System.in);
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     
     private ArrayList<FloraInfo> FloraFavorita = new ArrayList<>();
     private ArrayList<FaunaInfo> FaunaFavorita = new ArrayList<>();   
     
     //constructor
     
+    public Usuario() {
+        this.nombreDeUsuario = null;
+        this.password = null;
+        this.genero = null;
+        this.edad = 0;
+    }
+
     public Usuario(String nombreDeUsuario, String genero) {
         this.nombreDeUsuario = nombreDeUsuario;
         this.genero = genero;
@@ -32,6 +40,12 @@ public class Usuario {
 
     public Usuario(String nombreDeUsuario, String genero, int edad) {
         this.nombreDeUsuario = nombreDeUsuario;
+        this.genero = genero;
+        this.edad = edad;
+    }
+    public Usuario(String nombreDeUsuario,String password,String genero, int edad){
+        this.nombreDeUsuario =  nombreDeUsuario;
+        this.password = password;
         this.genero = genero;
         this.edad = edad;
     }
@@ -84,9 +98,11 @@ public class Usuario {
     
     //Crear Datos
     public void crearDatos(){
-        this.nombreDeUsuario = Entrada.next();
-        this.genero = Entrada.next();
+        this.nombreDeUsuario = Entrada.nextLine();
+        this.password = Entrada.nextLine();
+        this.genero = Entrada.nextLine();
         this.edad = Entrada.nextInt();
+        this.listaUsuarios.add(new Usuario(this.nombreDeUsuario,this.password,this.genero, this.edad));
     }
     
     //Leer Datos
@@ -107,5 +123,37 @@ public class Usuario {
                 System.out.println(FaunaFavorita.get(i));
         }
                     
+    }
+    public void mostrarUsuarios(){
+        int longitud = this.listaUsuarios.size();
+        
+        for(int i = 0; i<longitud; i++)
+            this.listaUsuarios.get(i).leerDatos();
+    }
+    public void mostrarFlora(ArrayList<Usuario> listaUsuarios){
+        int longitud = listaUsuarios.size();
+        
+        for(int i = 0; i<longitud; i++)
+            listaUsuarios.get(i).leerDatos();
+    }
+    public void Actualizar(String nombre){
+        int longitud = this.listaUsuarios.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaUsuarios.get(i).getNombreDeUsuario().contentEquals(nombre)){
+                this.listaUsuarios.get(i).crearDatos();
+                return;
+            }
+        }
+    }
+    public void Eliminar(String nombre){
+        int longitud = this.listaUsuarios.size();
+        for(int i = 0; i<longitud; i++)
+        {
+            if(this.listaUsuarios.get(i).getNombreDeUsuario().contentEquals(nombre)){
+                this.listaUsuarios.remove(i);
+                return;
+            }
+        }
     }
 }
