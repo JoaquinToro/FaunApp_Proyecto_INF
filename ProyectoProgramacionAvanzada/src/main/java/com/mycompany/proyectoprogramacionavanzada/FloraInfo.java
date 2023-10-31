@@ -111,23 +111,21 @@ public class FloraInfo extends Taxonomia {
     //Crear Datos
     public void crearDatos(){
         System.out.println("Ingrese el id");
-        this.floraId = Entrada.nextInt();
+        this.floraId = Integer.parseInt(Entrada.nextLine());
+        
         System.out.println("Ingrese el nombre comun");
         this.nombreComun = Entrada.nextLine();
+        
         System.out.println("Ingrese el nombre cientifico");
         this.nombreCientifico = Entrada.nextLine();
+        
         System.out.println("Ingrese la ubicacion");
         this.ubicacion = Entrada.nextLine();
+        
         System.out.println("Ingrese la funcion");
         this.funcion = Entrada.nextLine();
         
-        this.setDivision(Entrada.next());
-        this.setSubdivision(Entrada.next());
-        this.setClase(Entrada.next());
-        this.setOrden(Entrada.next());
-        this.setFamilia(Entrada.next());
-        this.setGenero(Entrada.next());
-        this.setEspecie(Entrada.next());
+        this.crearDatosTaxonomia();
         
         listaFlora.add(new FloraInfo(this.floraId,this.nombreComun,this.nombreCientifico,
                                      this.ubicacion, this.funcion, this.getDivision(),this.getSubdivision(),
