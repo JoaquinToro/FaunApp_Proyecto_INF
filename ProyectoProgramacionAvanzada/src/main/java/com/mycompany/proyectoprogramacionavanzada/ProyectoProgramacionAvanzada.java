@@ -76,6 +76,7 @@ public class ProyectoProgramacionAvanzada {
                             region.mostrarRegion();
                             break;
                     }
+                    break;
                 case 3:
                     System.out.println("Que clase quieres actualizar?");
                     System.out.println("1: Flora 2:Fauna 3:Usuario 4:Region");
@@ -107,6 +108,7 @@ public class ProyectoProgramacionAvanzada {
                             break;
                         
                     }
+                    break;
                 case 4:
                     System.out.println("Que clase quieres eliminar?");
                     System.out.println("1: Flora 2:Fauna 3:Usuario 4:Region");
@@ -136,6 +138,7 @@ public class ProyectoProgramacionAvanzada {
                             break;
                         
                     }
+                    break;
             }
         }
     }
