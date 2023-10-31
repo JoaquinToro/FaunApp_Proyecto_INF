@@ -1,8 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-import java.util.Scanner
+
 package com.mycompany.proyectoprogramacionavanzada;
+import java.util.Scanner;
 
 /**
  *
@@ -17,9 +18,9 @@ public class ProyectoProgramacionAvanzada {
         FaunaInfo fauna = new FaunaInfo();
         Usuario usuario = new Usuario();
         Region region = new Region();
-        menu();
+        menu(flora,fauna,usuario,region);
     }
-    public static void menu(){
+    public static void menu(FloraInfo flora,FaunaInfo fauna,Usuario usuario, Region region){
         
         
         int decision;
