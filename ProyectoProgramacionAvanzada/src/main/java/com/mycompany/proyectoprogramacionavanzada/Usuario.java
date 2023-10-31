@@ -101,7 +101,8 @@ public class Usuario {
         this.nombreDeUsuario = Entrada.nextLine();
         this.password = Entrada.nextLine();
         this.genero = Entrada.nextLine();
-        this.edad = Entrada.nextInt();
+        this.edad = Integer.parseInt(Entrada.nextLine());
+        
         this.listaUsuarios.add(new Usuario(this.nombreDeUsuario,this.password,this.genero, this.edad));
     }
     
