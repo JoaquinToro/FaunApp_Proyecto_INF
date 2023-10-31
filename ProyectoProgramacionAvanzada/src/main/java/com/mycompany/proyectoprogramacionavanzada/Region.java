@@ -83,7 +83,7 @@ public class Region {
     
     //Crear Datos
     public void crearDatos(){
-        this.id = Entrada.nextInt();
+        this.id = Integer.parseInt(Entrada.nextLine());
         this.nombre = Entrada.nextLine();
         this.descripcion = Entrada.nextLine();
         this.clima = Entrada.nextLine();
