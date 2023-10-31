@@ -117,27 +117,21 @@ public class FaunaInfo extends Taxonomia{
     
     public void crearDatos(){
         System.out.println("Ingrese el id");
-        this.faunaId = Entrada.nextInt();
+        this.faunaId = Integer.parseInt(Entrada.nextLine());
         System.out.println("Ingrese el nombreComun");
-        this.nombreComun = Entrada.next();
+        this.nombreComun = Entrada.nextLine();
         System.out.println("Ingrese el nombre Cientifico");
-        this.nombreCientifico = Entrada.next();
+        this.nombreCientifico = Entrada.nextLine();
         System.out.println("Ingrese la ubicacion");
-        this.ubicacion = Entrada.next();
+        this.ubicacion = Entrada.nextLine();
         System.out.println("Ingrese la alimentacion");
-        this.alimentacion = Entrada.next();
+        this.alimentacion = Entrada.nextLine();
         System.out.println("Ingrese la peligrosidad");
-        this.peligrosidad = Entrada.nextInt();
+        this.peligrosidad = Integer.parseInt(Entrada.nextLine());
         
         
         
-        this.setDivision(Entrada.next());
-        this.setSubdivision(Entrada.next());
-        this.setClase(Entrada.next());
-        this.setOrden(Entrada.next());
-        this.setFamilia(Entrada.next());
-        this.setGenero(Entrada.next());
-        this.setEspecie(Entrada.next());
+        this.crearDatosTaxonomia();
         
         listaFauna.add(new FaunaInfo(this.faunaId,this.nombreComun,this.nombreCientifico,
                                      this.ubicacion,this.alimentacion,this.peligrosidad,this.getDivision(),this.getSubdivision(),
