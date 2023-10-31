@@ -13,8 +13,10 @@ public class ProyectoProgramacionAvanzada {
     public static void main(String[] args) {
         System.out.println("Hola es necesario crear un usuario primero, porfavor crea tu usuario");
         
-        Usuario yo = new Usuario("Joaquin Toro","Hombre",21);
-        yo.leerDatos();
+        FloraInfo flora = new FloraInfo();
+        FaunaInfo fauna = new FaunaInfo();
+        Usuario usuario = new Usuario();
+        Region region = new Region();
         menu();
     }
     public static void menu(){
@@ -41,20 +43,16 @@ public class ProyectoProgramacionAvanzada {
                     switch(subdecision)
                     {
                         case 1:
-                            FloraInfo newFlora = new FloraInfo();
-                            newFlora.crearDatos();
+                            flora.crearDatos();
                             break;
                         case 2:
-                            FaunaInfo newFauna = new FaunaInfo();
-                            newFauna.crearDatos();
+                            fauna.crearDatos();
                             break;
                         case 3:
-                            Usuario newUser = new Usuario();
-                            newUser.crearDatos();
+                            usuario.crearDatos();
                             break;
                         case 4:
-                            Region newRegion = new Region();
-                            newRegion.crearDatos();
+                            region.crearDatos();
                             break;
                     }
                     break;
@@ -65,20 +63,16 @@ public class ProyectoProgramacionAvanzada {
                     switch(subdecision)
                     {
                         case 1:
-                            FloraInfo newFlora = new FloraInfo();
-                            newFlora.mostrarFlora();
+                            flora.mostrarFlora();
                             break;
                         case 2:
-                            FaunaInfo newFauna = new FaunaInfo();
-                            newFauna.mostrarFauna();
+                            fauna.mostrarFauna();
                             break;
                         case 3:
-                            Usuario newUser = new Usuario();
-                            newUser.mostrarUsuarios();
+                            usuario.mostrarUsuarios();
                             break;
                         case 4:
-                            Region newRegion = new Region();
-                            newRegion.mostrarRegion();
+                            region.mostrarRegion();
                             break;
                     }
                 case 3:
@@ -92,27 +86,23 @@ public class ProyectoProgramacionAvanzada {
                         case 1:
                             System.out.println("Ingrese el id");
                             idBuscado = entrada.nextInt();
-                            FloraInfo newFlora = new FloraInfo();
-                            newFlora.Actualizar(idBuscado);
+                            flora.Actualizar(idBuscado);
                             break;
 
                         case 2:
                             System.out.println("Ingrese el id");
                             idBuscado = entrada.nextInt();
-                            FaunaInfo newFauna = new FaunaInfo();
-                            newFauna.Actualizar(idBuscado);
+                            fauna.Actualizar(idBuscado);
                             break;
                         case 3:
                             System.out.println("Ingrese el nombre de usuario");
                             nombre = entrada.nextLine();
-                            Usuario newUser = new Usuario();
-                            newUser.Actualizar(nombre);
+                            usuario.Actualizar(nombre);
                             break;
                         case 4:
                             System.out.println("Ingrese el id");
                             idBuscado = entrada.nextInt();
-                            Region newRegion = new Region();
-                            newRegion.Actualizar(idBuscado);
+                            region.Actualizar(idBuscado);
                             break;
                         
                     }
@@ -125,27 +115,23 @@ public class ProyectoProgramacionAvanzada {
                         case 1:
                             System.out.println("Ingrese el id");
                             idBuscado = entrada.nextInt();
-                            FloraInfo newFlora = new FloraInfo();
-                            newFlora.Eliminar(idBuscado);
+                            flora.Eliminar(idBuscado);
                             break;
                         case 2:
                             System.out.println("Ingrese el id");
                             idBuscado = entrada.nextInt();
-                            FaunaInfo newFauna = new FaunaInfo();
-                            newFauna.Eliminar(idBuscado);
+                            fauna.Eliminar(idBuscado);
                             break;
                         case 3:
                             System.out.println("Ingrese el nombre de usuario");
                             nombre = entrada.nextLine();
-                            Usuario newUser = new Usuario();
-                            newUser.Eliminar(nombre);
+                            usuario.Eliminar(nombre);
                             
                             break;
                         case 4:
                             System.out.println("Ingrese el id");
                             idBuscado = entrada.nextInt();
-                            Region newRegion = new Region();
-                            newRegion.Eliminar(idBuscado);
+                            region.Eliminar(idBuscado);
                             break;
                         
                     }
