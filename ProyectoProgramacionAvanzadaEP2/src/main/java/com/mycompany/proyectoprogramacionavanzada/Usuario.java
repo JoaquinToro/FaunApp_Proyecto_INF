@@ -182,11 +182,13 @@ public class Usuario implements Sesion{
         }
     }
 
-    public void abrir() {
+    @Override
+    public void abrirSesion() {
         this.estadoSesion=abierta;
     }
 
-    public void cerrar() {
+    @Override
+    public void cerrarSesion() {
         this.estadoSesion=cerrada;
     }
 }
