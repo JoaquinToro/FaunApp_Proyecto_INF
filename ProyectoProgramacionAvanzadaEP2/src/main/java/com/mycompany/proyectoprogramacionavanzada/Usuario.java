@@ -11,13 +11,14 @@ import java.util.Scanner;
  *
  * @author Joaquin
  */
-public class Usuario {
+public class Usuario implements Sesion{
     
     //atributos
     private String nombreDeUsuario;
     private String password;
     private String genero;
     private String edad;
+    private int estadoSesion;
     private Scanner Entrada = new Scanner(System.in);
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     
@@ -73,6 +74,14 @@ public class Usuario {
         return FaunaFavorita;
     }
 
+    public int getSesionActiva() {
+        return estadoSesion;
+    }
+
+    public Scanner getEntrada() {
+        return Entrada;
+    }
+
     //Setters
 
     public void setNombreDeUsuario(String nombreDeUsuario) {
@@ -101,6 +110,10 @@ public class Usuario {
 
     public void setFaunaFavorita(ArrayList<FaunaInfo> FaunaFavorita) {
         this.FaunaFavorita = FaunaFavorita;
+    }
+
+    public void setSesionActiva(int estadoSesion) {
+        this.estadoSesion = estadoSesion;
     }
     
     //Crear Datos
@@ -167,5 +180,13 @@ public class Usuario {
                     Usuarios.get(i).getPassword(),Usuarios.get(i).getGenero(),
                     Usuarios.get(i).getEdad()));
         }
+    }
+
+    public void abrir() {
+        this.estadoSesion=abierta;
+    }
+
+    public void cerrar() {
+        this.estadoSesion=cerrada;
     }
 }
