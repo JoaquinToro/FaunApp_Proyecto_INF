@@ -4,7 +4,6 @@
  */
 package Modelos;
 
-import Vistas.Informacion;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -58,10 +57,10 @@ public class Tips extends Informacion{
     //Metodos
     public void crearDatos(){
         System.out.println("Ingrese el id");
-        this.tipID = Integer.parseInt(Entrada.nextLine());
+        this.tipID = comprobar();
         
         System.out.println("Ingrese la categoria");
-        this.categoria = Entrada.nextLine();
+        this.categoria = comprobarString();
         
         this.crearInformacion();
         
@@ -105,4 +104,29 @@ public class Tips extends Informacion{
         for(int i = 0; i<longitud; i++)
             this.listaTips.get(i).leerDatos();
     }
+    
+    @Override
+    public int comprobar(){
+        int num2;
+        while (true) {
+            try {
+                num2 = Integer.parseInt(Entrada.nextLine());
+                return num2;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+    
+    private String comprobarString() {
+        String linea;
+        while (true) {
+            try {
+                linea = Entrada.nextLine();
+                return linea;
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un nombre válido.");
+            }
+        }
+    }  
 }
