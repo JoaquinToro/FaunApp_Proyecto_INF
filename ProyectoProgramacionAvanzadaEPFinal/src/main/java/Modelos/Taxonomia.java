@@ -115,21 +115,21 @@ public abstract class Taxonomia {
     
     public void crearDatosTaxonomia(){
         System.out.println("Ingrese el ID de la informacion");
-        this.taxonomiaID = Integer.parseInt(Entrada.nextLine());
+        this.taxonomiaID = comprobar();
         System.out.println("Escriba la division");
-        this.division = Entrada.nextLine();
+        this.division = comprobarString();
         System.out.println("Escriba la subdivision");
-        this.subdivision = Entrada.nextLine();
+        this.subdivision = comprobarString();
         System.out.println("Escriba la clase");
-        this.clase = Entrada.nextLine();
+        this.clase = comprobarString();
         System.out.println("Escriba el orden");
-        this.orden = Entrada.nextLine();
+        this.orden = comprobarString();
         System.out.println("Escriba la familia");
-        this.familia = Entrada.nextLine();
+        this.familia = comprobarString();
         System.out.println("Escriba el genero");
-        this.genero = Entrada.nextLine();
+        this.genero = comprobarString();
         System.out.println("Escriba la especie");
-        this.especie = Entrada.nextLine();
+        this.especie = comprobarString();
     }
     public void leerDatos(){
         System.out.println(this.division);
@@ -143,4 +143,29 @@ public abstract class Taxonomia {
     }
     
     public abstract void imprimirCategoria();
+    
+    
+    public int comprobar(){
+        int num2;
+        while (true) {
+            try {
+                num2 = Integer.parseInt(Entrada.nextLine());
+                return num2;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+    
+    private String comprobarString() {
+        String linea;
+        while (true) {
+            try {
+                linea = Entrada.nextLine();
+                return linea;
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un nombre válido.");
+            }
+        }
+    }     
 }
