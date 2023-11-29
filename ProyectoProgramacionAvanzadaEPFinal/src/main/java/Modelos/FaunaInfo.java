@@ -11,6 +11,15 @@ import java.util.Scanner;
  *
  * @author Joaquin
  */
+package Modelos;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Joaquin
+ */
 public class FaunaInfo extends Taxonomia{
     //ATRIBUTOS
     private int faunaId;
@@ -117,17 +126,17 @@ public class FaunaInfo extends Taxonomia{
     
     public void crearDatos(){
         System.out.println("Ingrese el id");
-        this.faunaId = Integer.parseInt(Entrada.nextLine());
+        this.faunaId = comprobar();
         System.out.println("Ingrese el nombreComun");
-        this.nombreComun = Entrada.nextLine();
+        this.nombreComun = comprobarString();
         System.out.println("Ingrese el nombre Cientifico");
-        this.nombreCientifico = Entrada.nextLine();
+        this.nombreCientifico = comprobarString();
         System.out.println("Ingrese la ubicacion");
-        this.ubicacion = Entrada.nextLine();
+        this.ubicacion = comprobarString();
         System.out.println("Ingrese la alimentacion");
-        this.alimentacion = Entrada.nextLine();
+        this.alimentacion = comprobarString();
         System.out.println("Ingrese la peligrosidad");
-        this.peligrosidad = Integer.parseInt(Entrada.nextLine());
+        this.peligrosidad = comprobar();
         
         
         
@@ -191,8 +200,33 @@ public class FaunaInfo extends Taxonomia{
         }
     }
     
+    public int comprobar(){
+        int num2;
+        while (true) {
+            try {
+                num2 = Integer.parseInt(Entrada.nextLine());
+                return num2;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+    
+    private String comprobarString() {
+        String linea;
+        while (true) {
+            try {
+                linea = Entrada.nextLine();
+                return linea;
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un nombre válido.");
+            }
+        }
+    }
+    
     @Override
     public void imprimirCategoria(){
         System.out.println("Fauna");
     }
+
 }
