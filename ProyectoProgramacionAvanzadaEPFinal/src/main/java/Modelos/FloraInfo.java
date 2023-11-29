@@ -121,7 +121,7 @@ public class FloraInfo extends Taxonomia {
         this.nombreCientifico = comprobarString();
         
         System.out.println("Ingrese la ubicacion");
-        this.descipcion = comprobarString();
+        this.descripcion = comprobarString();
         
         System.out.println("Ingrese la funcion");
         this.funcion = comprobarString();
@@ -129,7 +129,7 @@ public class FloraInfo extends Taxonomia {
         this.crearDatosTaxonomia();
         
         listaFlora.add(new FloraInfo(this.floraId,this.nombreComun,this.nombreCientifico,
-                                     this.ubicacion, this.funcion, this.getDivision(),this.getSubdivision(),
+                                     this.descripcion, this.funcion, this.getDivision(),this.getSubdivision(),
                                      this.getClase(), this.getOrden(), this.getFamilia(), this.getGenero(),this.getEspecie()));
     }
     //Leer Datos
