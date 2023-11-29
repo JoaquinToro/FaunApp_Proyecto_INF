@@ -18,7 +18,7 @@ public class FloraInfo extends Taxonomia {
     private int floraId;
     private String nombreComun;
     private String nombreCientifico;
-    private String ubicacion;
+    private String descripcion;
     private String funcion;
     private Scanner Entrada = new Scanner(System.in);
     private ArrayList<FloraInfo> listaFlora = new ArrayList<>();
@@ -31,7 +31,7 @@ public class FloraInfo extends Taxonomia {
         this.floraId = 0;
         this.nombreComun = null;
         this.nombreCientifico = null;
-        this.ubicacion = null;
+        this.descripcion = null;
         this.funcion = null;
         
     }
@@ -41,7 +41,7 @@ public class FloraInfo extends Taxonomia {
         this.floraId = floraId;
         this.nombreComun = nombreComun;
         this.nombreCientifico = nombreCientifico;
-        this.ubicacion = ubicacion;
+        this.descripcion = ubicacion;
         this.funcion = funcion;
         
     }
@@ -60,8 +60,8 @@ public class FloraInfo extends Taxonomia {
         return nombreCientifico;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     
@@ -93,8 +93,8 @@ public class FloraInfo extends Taxonomia {
         this.nombreCientifico = nombreCientifico;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setDescripcion(String ubicacion) {
+        this.descripcion = ubicacion;
     }
 
     public void setFuncion(String funcion) {
@@ -112,19 +112,19 @@ public class FloraInfo extends Taxonomia {
     //Crear Datos
     public void crearDatos(){
         System.out.println("Ingrese el id");
-        this.floraId = Integer.parseInt(Entrada.nextLine());
+        this.floraId = comprobar();
         
         System.out.println("Ingrese el nombre comun");
-        this.nombreComun = Entrada.nextLine();
+        this.nombreComun = comprobarString();
         
         System.out.println("Ingrese el nombre cientifico");
-        this.nombreCientifico = Entrada.nextLine();
+        this.nombreCientifico = comprobarString();
         
         System.out.println("Ingrese la ubicacion");
-        this.ubicacion = Entrada.nextLine();
+        this.descipcion = comprobarString();
         
         System.out.println("Ingrese la funcion");
-        this.funcion = Entrada.nextLine();
+        this.funcion = comprobarString();
         
         this.crearDatosTaxonomia();
         
@@ -146,7 +146,7 @@ public class FloraInfo extends Taxonomia {
         System.out.println("Información General");
         System.out.println(this.nombreCientifico);
         System.out.println(this.nombreComun);
-        System.out.println(this.ubicacion);
+        System.out.println(this.descripcion);
         System.out.println(this.funcion);
         
         System.out.println("Fin Información");
@@ -184,6 +184,32 @@ public class FloraInfo extends Taxonomia {
             }
         }
     }    
+    
+    public int comprobar(){
+        int num2;
+        while (true) {
+            try {
+                num2 = Integer.parseInt(Entrada.nextLine());
+                return num2;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+    
+    private String comprobarString() {
+        String linea;
+        while (true) {
+            try {
+                linea = Entrada.nextLine();
+                return linea;
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un nombre válido.");
+            }
+        }
+    }    
+    
+    
     
     @Override
     public void imprimirCategoria(){
