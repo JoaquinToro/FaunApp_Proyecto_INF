@@ -83,10 +83,10 @@ public class Region {
     
     //Crear Datos
     public void crearDatos(){
-        this.id = Integer.parseInt(Entrada.nextLine());
-        this.nombre = Entrada.nextLine();
-        this.descripcion = Entrada.nextLine();
-        this.clima = Entrada.nextLine();
+        this.id = comprobar();
+        this.nombre = comprobarString();
+        this.descripcion = comprobarString();
+        this.clima = comprobarString();
         listaRegiones.add(new Region(this.id,this.nombre,this.descripcion,this.clima));
     }
     
@@ -132,4 +132,29 @@ public class Region {
             }
         }
     }
+    
+    public int comprobar(){
+        int num2;
+        while (true) {
+            try {
+                num2 = Integer.parseInt(Entrada.nextLine());
+                return num2;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+    
+    private String comprobarString() {
+        String linea;
+        while (true) {
+            try {
+                linea = Entrada.nextLine();
+                return linea;
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un nombre válido.");
+            }
+        }
+    }   
 }
+
