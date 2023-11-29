@@ -4,7 +4,6 @@
  */
 package Modelos;
 
-import Vistas.Informacion;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -89,16 +88,16 @@ public class Noticia extends Informacion{
     //Metodos
     public void crearDatos(){
         System.out.println("Ingrese el id");
-        this.noticiaID = Integer.parseInt(Entrada.nextLine());
+        this.noticiaID = comprobar();
         
         System.out.println("Ingrese el titulo");
-        this.titulo = Entrada.nextLine();
+        this.titulo = comprobarString();
         
         System.out.println("Ingrese el autor");
-        this.autor = Entrada.nextLine();
+        this.autor = comprobarString();
         
         System.out.println("Ingrese la fecha en format yyyyMMdd");
-        this.fecha = Integer.parseInt(Entrada.nextLine());
+        this.fecha = comprobar();
         
         this.crearInformacion();
         
@@ -148,4 +147,27 @@ public class Noticia extends Informacion{
         for(int i = 0; i<longitud; i++)
             this.listaNoticias.get(i).leerDatos();
     }
+    public int comprobar(){
+        int num2;
+        while (true) {
+            try {
+                num2 = Integer.parseInt(Entrada.nextLine());
+                return num2;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+    
+    private String comprobarString() {
+        String linea;
+        while (true) {
+            try {
+                linea = Entrada.nextLine();
+                return linea;
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un nombre válido.");
+            }
+        }
+    }    
 }
