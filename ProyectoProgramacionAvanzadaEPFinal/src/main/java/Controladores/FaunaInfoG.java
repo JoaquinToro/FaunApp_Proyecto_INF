@@ -64,10 +64,10 @@ public class FaunaInfoG implements FaunaInfoDB{
         try {
             Statement s = link.createStatement();
             query=  "select *"
-                    + "from flora"
+                    + "from fauna"
                     + "inner join taxonomia"
-                    + "on flora.taxonomiaID = taxonomia.taxonomiaID"
-                    + "where flora.nombreComun = '" +nombre+"'";
+                    + "on fauna.taxonomiaID = taxonomia.taxonomiaID"
+                    + "where fauna.nombreComun = '" +nombre+"'";
             ResultSet rs=s.executeQuery(query);
             
                    
@@ -83,7 +83,7 @@ public class FaunaInfoG implements FaunaInfoDB{
                fauna.setNombreCientifico(rs.getString("nombreCientifico"));
                fauna.setNombreComun(rs.getString("nombreComun"));
 
-               fauna.setFaunaId(Integer.parseInt(rs.getString("floraID")));
+               fauna.setFaunaId(Integer.parseInt(rs.getString("faunaID")));
                fauna.setUbicacion(rs.getString("ubicacion"));
                fauna.setAlimentacion(rs.getString("alimentacion"));
                fauna.setPeligrosidad(Integer.parseInt("peligrosidad"));
