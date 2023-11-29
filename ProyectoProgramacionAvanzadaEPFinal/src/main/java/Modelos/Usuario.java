@@ -14,13 +14,13 @@ import java.util.Scanner;
 public class Usuario implements Sesion{
     
     //atributos
+    private int id;
     private String nombreDeUsuario;
     private String password;
     private String genero;
     private String edad;
     private int estadoSesion = 0;
     private Scanner Entrada = new Scanner(System.in);
-    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     
     private ArrayList<FloraInfo> FloraFavorita;
     private ArrayList<FaunaInfo> FaunaFavorita;   
@@ -60,6 +60,10 @@ public class Usuario implements Sesion{
     
     //Getters
 
+    public int getId() {
+        return id;
+    }
+
     public String getNombreDeUsuario() {
         return nombreDeUsuario;
     }
@@ -68,9 +72,7 @@ public class Usuario implements Sesion{
         return password;
     }
 
-    public ArrayList<Usuario> getListaUsuarios() {
-        return listaUsuarios;
-    }
+
 
     public String getGenero() {
         return genero;
@@ -97,6 +99,10 @@ public class Usuario implements Sesion{
     }
 
     //Setters
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setNombreDeUsuario(String nombreDeUsuario) {
         this.nombreDeUsuario = nombreDeUsuario;
@@ -106,9 +112,7 @@ public class Usuario implements Sesion{
         this.password = password;
     }
 
-    public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
-    }
+
 
     public void setGenero(String genero) {
         this.genero = genero;
@@ -132,16 +136,17 @@ public class Usuario implements Sesion{
     
     //Crear Datos
     public void crearDatos(){
-        this.nombreDeUsuario = Entrada.nextLine();
-        this.password = Entrada.nextLine();
-        this.genero = Entrada.nextLine();
-        this.edad =Entrada.nextLine();
+        this.id = comprobar();
+        this.nombreDeUsuario = comprobarString();
+        this.password = comprobarString();
+        this.genero = comprobarString();
+        this.edad = comprobarString();
         
-        this.listaUsuarios.add(new Usuario(this.nombreDeUsuario,this.password,this.genero, this.edad, this.FloraFavorita, this.FaunaFavorita));
     }
     
     //Leer Datos
     public void leerDatos(){
+        System.out.println(this.id);
         System.out.println(this.nombreDeUsuario);
         System.out.println(this.genero);
         System.out.println(this.edad);
@@ -159,42 +164,8 @@ public class Usuario implements Sesion{
         }
                     
     }
-    public void mostrarUsuarios(){
-        int longitud = this.listaUsuarios.size();
-        
-        for(int i = 0; i<longitud; i++)
-            this.listaUsuarios.get(i).leerDatos();
-    }
     
-    public void Actualizar(String nombre){
-        int longitud = this.listaUsuarios.size();
-        for(int i = 0; i<longitud; i++)
-        {
-            if(this.listaUsuarios.get(i).getNombreDeUsuario().contentEquals(nombre)){
-                this.listaUsuarios.get(i).crearDatos();
-                return;
-            }
-        }
-    }
-    public void Eliminar(String nombre){
-        int longitud = this.listaUsuarios.size();
-        for(int i = 0; i<longitud; i++)
-        {
-            if(this.listaUsuarios.get(i).getNombreDeUsuario().contentEquals(nombre)){
-                this.listaUsuarios.remove(i);
-                return;
-            }
-        }
-    }
     
-    public void agregarALista(ArrayList<Usuario> Usuarios){
-        int longitud = Usuarios.size();
-        for(int i = 0; i<longitud; i++){
-            this.listaUsuarios.add(new Usuario(Usuarios.get(i).getNombreDeUsuario(),
-                    Usuarios.get(i).getPassword(),Usuarios.get(i).getGenero(),
-                    Usuarios.get(i).getEdad()));
-        }
-    }
 
     @Override
     public void abrirSesion() {
@@ -212,4 +183,29 @@ public class Usuario implements Sesion{
     public void agregarFauna(FaunaInfo fauna){
         this.FaunaFavorita.add(fauna);
     }
+    
+    
+    public int comprobar(){
+        int num2;
+        while (true) {
+            try {
+                num2 = Integer.parseInt(Entrada.nextLine());
+                return num2;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido.");
+            }
+        }
+    }
+    
+    private String comprobarString() {
+        String linea;
+        while (true) {
+            try {
+                linea = Entrada.nextLine();
+                return linea;
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un nombre válido.");
+            }
+        }
+    }    
 }
