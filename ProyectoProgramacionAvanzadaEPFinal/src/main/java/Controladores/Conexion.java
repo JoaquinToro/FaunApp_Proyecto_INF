@@ -20,7 +20,7 @@ public class Conexion {
     
     
     public Conexion(){
-        this.db = "proyecto";
+        this.db = "faunappdb";
         this.url = "jdbc:mysql://localhost/" + db;
         this.user="root";
         this.pass="";
