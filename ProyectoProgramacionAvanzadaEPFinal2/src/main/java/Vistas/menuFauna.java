@@ -5,7 +5,11 @@
 package Vistas;
 
 import Controladores.Conexion;
+import Controladores.FaunaInfoG;
+import Controladores.FloraInfoG;
 import Controladores.TipsG;
+import Modelos.FaunaInfo;
+import Modelos.FloraInfo;
 import Modelos.Tips;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -20,17 +24,24 @@ public class menuFauna extends javax.swing.JFrame {
     /**
      * Creates new form menuFauna
      */
+    FaunaInfoG connFauna = new FaunaInfoG();
+    TipsG connTips = new TipsG();
+
+    Tips tip = new Tips();
+
+    Conexion conexion=new Conexion();
+    Connection link=conexion.Conectar();
+
+    ArrayList<FaunaInfo>listaFauna = connFauna.Leer(link);
+    
+    ArrayList<Tips>listaTips = connTips.Leer(link);
+
+
+    
     public menuFauna() {
         initComponents();
-        TipsG connTips = new TipsG();
-        Tips tip = new Tips();
-        
-        Conexion conexion=new Conexion();
-        Connection link=conexion.Conectar();
-        
-        ArrayList<Tips>listaTips = connTips.Leer(link);
-        
         Random random = new Random();
+    
         int randomNumber = random.nextInt(9);
         
         txtPaneTip.setEditable(false);
@@ -50,13 +61,37 @@ public class menuFauna extends javax.swing.JFrame {
 
         lblID = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
-        inputUser = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         lblTitulo = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         lblTip = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPaneTip = new javax.swing.JTextPane();
         btnVolver = new javax.swing.JButton();
+        txtCientifico = new javax.swing.JTextField();
+        txtUbicacion = new javax.swing.JTextField();
+        txtAlimentacion = new javax.swing.JTextField();
+        txtConservacion = new javax.swing.JTextField();
+        lblSub = new javax.swing.JLabel();
+        txtDivision = new javax.swing.JTextField();
+        lblClase = new javax.swing.JLabel();
+        lblEsp = new javax.swing.JLabel();
+        lblFam = new javax.swing.JLabel();
+        lblGenero = new javax.swing.JLabel();
+        lblCientifico = new javax.swing.JLabel();
+        lblNombre1 = new javax.swing.JLabel();
+        lblUbicacion = new javax.swing.JLabel();
+        lblAlimentacion = new javax.swing.JLabel();
+        lblCons = new javax.swing.JLabel();
+        lblTax = new javax.swing.JLabel();
+        lblDiv = new javax.swing.JLabel();
+        lblOrden = new javax.swing.JLabel();
+        txtSub = new javax.swing.JTextField();
+        txtOrden = new javax.swing.JTextField();
+        txtClase = new javax.swing.JTextField();
+        txtFamilia = new javax.swing.JTextField();
+        txtGenero = new javax.swing.JTextField();
+        txtEspecie = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,9 +99,9 @@ public class menuFauna extends javax.swing.JFrame {
 
         lblLogo.setText("FaunApp");
 
-        inputUser.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputUserActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
 
@@ -74,6 +109,11 @@ public class menuFauna extends javax.swing.JFrame {
         lblTitulo.setText("Busqueda Fauna");
 
         btnBuscar.setText("Buscar!");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarMousePressed(evt);
+            }
+        });
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -91,70 +131,209 @@ public class menuFauna extends javax.swing.JFrame {
             }
         });
 
+        txtUbicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUbicacionActionPerformed(evt);
+            }
+        });
+
+        lblSub.setText("SubDivision:");
+
+        lblClase.setText("Clase:");
+
+        lblEsp.setText("Especie:");
+
+        lblFam.setText("Familia:");
+
+        lblGenero.setText("Genero:");
+
+        lblCientifico.setText("Nombre Cientifico:");
+
+        lblNombre1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+
+        lblUbicacion.setText("Ubicacion:");
+
+        lblAlimentacion.setText("Alimentacion:");
+
+        lblCons.setText("Estado de conservacion:");
+
+        lblTax.setText("Informacion Taxonomia");
+
+        lblDiv.setText("Division:");
+
+        lblOrden.setText("Orden:");
+
+        txtEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEspecieActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLogo))
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lblTip)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 89, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputUser, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitulo)
-                        .addGap(127, 127, 127))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addComponent(lblTitulo)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBuscar)
-                        .addGap(229, 229, 229))
+                        .addGap(102, 102, 102))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTip)
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTax, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnVolver)
-                        .addContainerGap())))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOrden, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDiv, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblSub, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDivision, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(txtSub)
+                            .addComponent(txtOrden)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblCons)
+                                    .addComponent(lblCientifico))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAlimentacion))
+                                .addGap(42, 42, 42)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCientifico, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(txtUbicacion)
+                            .addComponent(txtAlimentacion)
+                            .addComponent(txtConservacion)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblClase)
+                            .addComponent(lblGenero)
+                            .addComponent(lblFam)
+                            .addComponent(lblEsp))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtClase, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(79, 79, 79))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 91, Short.MAX_VALUE)
+                        .addComponent(lblNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCientifico)
+                            .addComponent(txtCientifico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUbicacion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAlimentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlimentacion))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCons)
+                            .addComponent(txtConservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(lblTax)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDiv)
+                            .addComponent(txtDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSub)
+                            .addComponent(txtSub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVolver))
+                        .addGap(74, 74, 74)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(btnBuscar)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTip)
-                        .addGap(52, 52, 52))))
+                        .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblOrden)
+                                    .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(txtClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(lblClase)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblFam)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblGenero)
+                                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblEsp))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lblTip)
+                                    .addGap(18, 18, 18))))
+                        .addContainerGap(36, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUserActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputUserActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -164,6 +343,41 @@ public class menuFauna extends javax.swing.JFrame {
         this.setVisible(false);
         setDefaultCloseOperation(this.EXIT_ON_CLOSE);
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void txtUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUbicacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUbicacionActionPerformed
+
+    private void txtEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEspecieActionPerformed
+
+    private void btnBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMousePressed
+        String nombre = txtNombre.getText();
+        for(int i=0;i<listaFauna.size();i++){
+            if(listaFauna.get(i).getNombreComun().equals(nombre))
+            {
+                lblNombre1.setText(listaFauna.get(i).getNombreComun());
+                txtCientifico.setText(listaFauna.get(i).getNombreCientifico());
+                txtUbicacion.setText(listaFauna.get(i).getUbicacion());
+                txtConservacion.setText(Integer.toString(listaFauna.get(i).getPeligrosidad()));
+                txtAlimentacion.setText(listaFauna.get(i).getAlimentacion());
+                
+                
+                
+                txtDivision.setText(listaFauna.get(i).getDivision());
+                txtSub.setText(listaFauna.get(i).getSubdivision());
+                txtClase.setText(listaFauna.get(i).getClase());
+                txtOrden.setText(listaFauna.get(i).getOrden());
+                txtFamilia.setText(listaFauna.get(i).getFamilia());
+                txtGenero.setText(listaFauna.get(i).getGenero());
+                txtEspecie.setText(listaFauna.get(i).getEspecie());
+            }
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarMousePressed
 
     /**
      * @param args the command line arguments
@@ -203,12 +417,36 @@ public class menuFauna extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JTextField inputUser;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAlimentacion;
+    private javax.swing.JLabel lblCientifico;
+    private javax.swing.JLabel lblClase;
+    private javax.swing.JLabel lblCons;
+    private javax.swing.JLabel lblDiv;
+    private javax.swing.JLabel lblEsp;
+    private javax.swing.JLabel lblFam;
+    private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblNombre1;
+    private javax.swing.JLabel lblOrden;
+    private javax.swing.JLabel lblSub;
+    private javax.swing.JLabel lblTax;
     private javax.swing.JLabel lblTip;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblUbicacion;
+    private javax.swing.JTextField txtAlimentacion;
+    private javax.swing.JTextField txtCientifico;
+    private javax.swing.JTextField txtClase;
+    private javax.swing.JTextField txtConservacion;
+    private javax.swing.JTextField txtDivision;
+    private javax.swing.JTextField txtEspecie;
+    private javax.swing.JTextField txtFamilia;
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtOrden;
     private javax.swing.JTextPane txtPaneTip;
+    private javax.swing.JTextField txtSub;
+    private javax.swing.JTextField txtUbicacion;
     // End of variables declaration//GEN-END:variables
 }
