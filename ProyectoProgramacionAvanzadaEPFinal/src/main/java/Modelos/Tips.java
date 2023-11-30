@@ -105,7 +105,6 @@ public class Tips extends Informacion{
             this.listaTips.get(i).leerDatos();
     }
     
-    @Override
     public int comprobar(){
         int num2;
         while (true) {
