@@ -4,6 +4,13 @@
  */
 package Vistas;
 
+import Controladores.Conexion;
+import Controladores.NoticiaG;
+import java.util.Random;
+import Modelos.Noticia;
+import java.sql.Connection;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -16,6 +23,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        
+        NoticiaG connNoticia = new NoticiaG();
+        Noticia noticia = new Noticia();
+        
+        Conexion conexion=new Conexion();
+        Connection link=conexion.Conectar();
+        
+        ArrayList<Noticia>listaNoticias = connNoticia.Leer(link);
+        
+        Random random = new Random();
+        int randomNumber = random.nextInt(9);
+        txtPaneNoticia.setEditable(false);
+        txtPaneNoticia.setText(listaNoticias.get(randomNumber).getTitulo()+ "\n\n" + listaNoticias.get(randomNumber).getTexto_Principal());
+        
     }
 
     /**
@@ -30,11 +51,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        lblNoticia = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtPaneNoticia = new javax.swing.JTextPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        menuBuscarFlora = new javax.swing.JMenu();
+        menuBuscarFauna = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
@@ -43,16 +67,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Edit");
         jMenuBar2.add(jMenu4);
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("BuscarFlora");
-        jMenuBar1.add(jMenu1);
+        txtPaneNoticia.setBackground(new java.awt.Color(51, 204, 0));
+        jScrollPane3.setViewportView(txtPaneNoticia);
 
-        jMenu6.setText("jMenu6");
-        jMenuBar1.add(jMenu6);
+        jLabel1.setBackground(new java.awt.Color(153, 255, 153));
+        jLabel1.setText("Noticia del medio ambiente");
 
-        jMenu5.setText("jMenu5");
-        jMenuBar1.add(jMenu5);
+        menuBuscarFlora.setText("BuscarFlora");
+        jMenuBar1.add(menuBuscarFlora);
+
+        menuBuscarFauna.setText("BuscarFauna");
+        jMenuBar1.add(menuBuscarFauna);
 
         jMenu2.setText("Usuario");
         jMenuBar1.add(jMenu2);
@@ -65,15 +96,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblNoticia, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNoticia, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -115,14 +150,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JLabel lblNoticia;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JMenu menuBuscarFauna;
+    private javax.swing.JMenu menuBuscarFlora;
+    private javax.swing.JTextPane txtPaneNoticia;
     // End of variables declaration//GEN-END:variables
 }
