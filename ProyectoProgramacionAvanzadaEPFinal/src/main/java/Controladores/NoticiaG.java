@@ -48,7 +48,7 @@ public class NoticiaG implements NoticiaDB{
     public boolean Crear(Connection link, Noticia noticia) {
         try{
             Statement s = link.createStatement();
-            query="INSERT INTO Noticia(noticiaID,titulo,fecha,fechaNacimiento,autor,informacionID)VALUES('"+noticia.getNoticiaID()+"','"+noticia.getTitulo()+"','"+noticia.getAutor()+"','"+noticia.getFecha()+"','"+noticia.getAutor()+"')";
+            query="INSERT INTO Noticia(noticiaID,titulo,autor,fecha,informacionID)VALUES('"+noticia.getNoticiaID()+"','"+noticia.getTitulo()+"','"+noticia.getAutor()+"','"+noticia.getFecha()+"','"+noticia.getInformacionID()+"')";
             s.executeUpdate(query);
             return true;
             
@@ -89,6 +89,8 @@ public class NoticiaG implements NoticiaDB{
                noticia.setTitulo(rs.getString("titulo"));
                noticia.setFecha(rs.getDate("fecha"));
                noticia.setAutor(rs.getString("autor"));
+               noticia.setTexto_Principal(rs.getString("textoPrincipal"));
+               noticia.setInformacionID(rs.getInt("informacionID"));
             }
             return noticia;
   
