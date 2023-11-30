@@ -46,21 +46,73 @@ public class NoticiaG implements NoticiaDB{
     }
 
     public boolean Crear(Connection link, Noticia noticia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            Statement s = link.createStatement();
+            query="INSERT INTO Noticia(noticiaID,titulo,fecha,fechaNacimiento,autor,informacionID)VALUES('"+noticia.getNoticiaID()+"','"+noticia.getTitulo()+"','"+noticia.getAutor()+"','"+noticia.getFecha()+"','"+noticia.getAutor()+"')";
+            s.executeUpdate(query);
+            return true;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 
     public boolean Actualizar(Connection link, Noticia noticia ) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            Statement s = link.createStatement();
+            query="UPDATE noticia set noticiaID='"+noticia.getNoticiaID()+"',titulo='"+noticia.getTitulo()+"',fecha='"+noticia.getFecha()+"',autor='"+noticia.getAutor()+"',comuna='"+"' WHERE noticiaID='"+noticia.getNoticiaID()+"'";
+            s.executeUpdate(query);
+            return true;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+        
+               
     }
+
+    public Noticia Buscar(Connection link, int id) {
+        Noticia noticia=new Noticia();
+        try {
+            Statement s = link.createStatement();
+            query="select * from noticia where noticiaID='"+id+"'";
+            ResultSet rs=s.executeQuery(query);
+            
+                   
+   
+            while (rs.next()){
+               noticia.setNoticiaID(rs.getInt("noticiaID"));
+               noticia.setTitulo(rs.getString("titulo"));
+               noticia.setFecha(rs.getDate("fecha"));
+               noticia.setAutor(rs.getString("autor"));
+            }
+            return noticia;
+  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }        
 
     public boolean Eliminar(Connection link, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           try {
+            //aqui hay que buscar si se encuentra 
+            
+            Statement s = link.createStatement();
+            query="delete * noticia where noticiaID='"+id+"'";
+            ResultSet rs=s.executeQuery(query);
+            
+            return true;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
-
-    public Usuario Buscar(Connection link, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }            
-        
-        
-        
-}
+} 
