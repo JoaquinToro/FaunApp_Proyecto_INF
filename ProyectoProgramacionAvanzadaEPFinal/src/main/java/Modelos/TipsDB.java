@@ -18,5 +18,5 @@ public interface TipsDB {
     public boolean Crear(Connection link, Tips tips);
     public boolean Actualizar(Connection link, int tipID);
     public boolean Eliminar(Connection link, int tipID);
-    public Noticia Buscar(Connection link, int tipID);
+    public Tips Buscar(Connection link, int tipID);
 }
