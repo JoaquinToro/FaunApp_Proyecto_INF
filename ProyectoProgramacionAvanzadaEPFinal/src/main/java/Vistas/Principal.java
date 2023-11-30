@@ -28,12 +28,7 @@ public class Principal {
         Usuario usuario = new Usuario();
         Region region = new Region();
         
-        usuario.agregarALista(reporte.getListaUsuariosReporte());
-        
-        InicioSesion login = new InicioSesion();
-        login.setListaUsuarios(usuario.getListaUsuarios());
-        login.setVisible(true);
-        
+
         menu(flora,fauna,usuario,region);
     }
     public static void menu(FloraInfo flora,FaunaInfo fauna,Usuario usuario, Region region){
@@ -85,9 +80,6 @@ public class Principal {
                         case 2:
                             fauna.mostrarFauna();
                             break;
-                        case 3:
-                            usuario.mostrarUsuarios();
-                            break;
                         case 4:
                             region.mostrarRegion();
                             break;
@@ -115,7 +107,6 @@ public class Principal {
                         case 3:
                             System.out.println("Ingrese el nombre de usuario");
                             nombre = entrada.nextLine();
-                            usuario.Actualizar(nombre);
                             break;
                         case 4:
                             System.out.println("Ingrese el id");
@@ -144,7 +135,6 @@ public class Principal {
                         case 3:
                             System.out.println("Ingrese el nombre de usuario");
                             nombre = entrada.nextLine();
-                            usuario.Eliminar(nombre);
                             
                             break;
                         case 4:
