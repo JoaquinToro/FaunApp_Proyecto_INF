@@ -24,7 +24,7 @@ public class UsuarioG implements UsuarioDB{
 
         try{
             Statement s = link.createStatement();
-            query="select * from Clientes";
+            query="SELECT * FROM Usuario";
             ResultSet rs=s.executeQuery(query);
             while (rs.next()){
                Usuario usuario = new Usuario();
