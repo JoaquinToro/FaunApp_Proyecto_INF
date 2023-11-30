@@ -26,14 +26,14 @@ public class Noticia extends Informacion{
     
     //Constructores
 
-    public Noticia(int noticiaID, String titulo, String autor, int fecha) {
+    public Noticia(int noticiaID, String titulo, String autor, Date fecha) {
         this.noticiaID = noticiaID;
         this.titulo = titulo;
         this.autor = autor;
         this.fecha = fecha;
     }
 
-    public Noticia(int noticiaID, String titulo, String autor, int fecha, String texto_Principal) {
+    public Noticia(int noticiaID, String titulo, String autor, Date fecha, String texto_Principal) {
         super(texto_Principal);
         this.noticiaID = noticiaID;
         this.titulo = titulo;
@@ -90,7 +90,7 @@ public class Noticia extends Informacion{
     }
     
     //Metodos
-    public void crearDatos(){
+    public void crearDatos() throws ParseException{
         System.out.println("Ingrese el id");
         this.noticiaID = comprobar();
         
@@ -125,7 +125,7 @@ public class Noticia extends Informacion{
         System.out.println();
         System.out.println(this.getTexto_Principal());
     }
-    public void Actualizar(int id){
+    public void Actualizar(int id) throws ParseException{
         int longitud = this.listaNoticias.size();
         for(int i = 0; i<longitud; i++)
         {
@@ -174,7 +174,7 @@ public class Noticia extends Informacion{
             }
         }
     }    
-}
+
     public void comprobarFecha() throws ParseException{
             try {
                 System.out.println("Ingrese la fecha en formato dd/MM/yyyy:");
@@ -185,3 +185,4 @@ public class Noticia extends Informacion{
                comprobarFecha();
             }
         }
+}
