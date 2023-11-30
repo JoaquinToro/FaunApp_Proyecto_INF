@@ -4,6 +4,9 @@
  */
 package Modelos;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +19,8 @@ public class Noticia extends Informacion{
     private int noticiaID;
     private String titulo;
     private String autor;
-    private int fecha;
+    private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    private Date fecha = new Date();
     private Scanner Entrada = new Scanner(System.in);
     private ArrayList<Noticia> listaNoticias = new ArrayList<>();
     
@@ -55,7 +59,7 @@ public class Noticia extends Informacion{
         return autor;
     }
 
-    public int getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
@@ -73,7 +77,7 @@ public class Noticia extends Informacion{
         this.autor = autor;
     }
 
-    public void setFecha(int fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -96,8 +100,8 @@ public class Noticia extends Informacion{
         System.out.println("Ingrese el autor");
         this.autor = comprobarString();
         
-        System.out.println("Ingrese la fecha en format yyyyMMdd");
-        this.fecha = comprobar();
+        System.out.println("Ingrese la fecha en format dd/MM/yyyy");
+        comprobarFecha();
         
         this.crearInformacion();
         
@@ -159,7 +163,7 @@ public class Noticia extends Informacion{
         }
     }
     
-    private String comprobarString() {
+    public String comprobarString() {
         String linea;
         while (true) {
             try {
@@ -171,3 +175,13 @@ public class Noticia extends Informacion{
         }
     }    
 }
+    public void comprobarFecha() throws ParseException{
+            try {
+                System.out.println("Ingrese la fecha en formato dd/MM/yyyy:");
+                String inputFecha = Entrada.nextLine();
+                this.fecha = formato.parse(inputFecha);
+            } catch(NumberFormatException e){
+               System.out.println("Este dato no es válido");
+               comprobarFecha();
+            }
+        }
