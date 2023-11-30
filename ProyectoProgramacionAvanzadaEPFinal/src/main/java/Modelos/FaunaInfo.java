@@ -11,15 +11,7 @@ import java.util.Scanner;
  *
  * @author Joaquin
  */
-package Modelos;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-/**
- *
- * @author Joaquin
- */
 public class FaunaInfo extends Taxonomia{
     //ATRIBUTOS
     private int faunaId;
