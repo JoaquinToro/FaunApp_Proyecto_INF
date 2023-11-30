@@ -6,7 +6,6 @@ package Controladores;
 
 import Modelos.FaunaInfo;
 import Modelos.FaunaInfoDB;
-import Modelos.FloraInfo;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,10 +42,10 @@ public class FaunaInfoG implements FaunaInfoDB{
                 fauna.setNombreCientifico(rs.getString("nombreCientifico"));
                 fauna.setNombreComun(rs.getString("nombreComun"));
                 
-                fauna.setFaunaId(Integer.parseInt(rs.getString("floraID")));
+                fauna.setFaunaId(Integer.parseInt(rs.getString("faunaID")));
                 fauna.setUbicacion(rs.getString("ubicacion"));
                 fauna.setAlimentacion(rs.getString("alimentacion"));
-                fauna.setPeligrosidad(Integer.parseInt("peligrosidad"));
+                fauna.setPeligrosidad(Integer.parseInt(rs.getString("peligrosidad")));
                 listaFauna.add(fauna);
                 
             }
@@ -87,7 +86,7 @@ public class FaunaInfoG implements FaunaInfoDB{
                fauna.setFaunaId(Integer.parseInt(rs.getString("faunaID")));
                fauna.setUbicacion(rs.getString("ubicacion"));
                fauna.setAlimentacion(rs.getString("alimentacion"));
-               fauna.setPeligrosidad(Integer.parseInt("peligrosidad"));
+               fauna.setPeligrosidad(Integer.parseInt(rs.getString("peligrosidad")));
                 
             }
             return fauna;
