@@ -16,7 +16,7 @@ public interface TipsDB {
     
     public ArrayList<Tips> Leer(Connection link);
     public boolean Crear(Connection link, Tips tips);
-    public boolean Actualizar(Connection link, int tipID);
+    public boolean Actualizar(Connection link, Tips tip);
     public boolean Eliminar(Connection link, int tipID);
     public Tips Buscar(Connection link, int tipID);
 }
