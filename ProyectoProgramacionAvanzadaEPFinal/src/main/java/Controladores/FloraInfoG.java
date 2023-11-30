@@ -25,10 +25,10 @@ public class FloraInfoG implements FloraInfoDB{
     public ArrayList<Modelos.FloraInfo> Leer(Connection link){
         try{
             Statement s = link.createStatement();
-            query=  "select *"
-                    + "from flora"
-                    + "inner join taxonomia"
-                    + "on flora.taxonomiaID = taxonomia.taxonomiaID";
+            query=  "SELECT * " +
+                    "FROM flora " +
+                    "INNER JOIN taxonomia " +
+                    "ON flora.taxonomiaID = taxonomia.taxonomiaID";
             ResultSet rs=s.executeQuery(query);
             while (rs.next()){
                 FloraInfo flora = new FloraInfo();
@@ -62,11 +62,11 @@ public class FloraInfoG implements FloraInfoDB{
         FloraInfo flora = new FloraInfo();
         try {
             Statement s = link.createStatement();
-            query=  "select *"
-                    + "from flora"
-                    + "inner join taxonomia"
-                    + "on flora.taxonomiaID = taxonomia.taxonomiaID"
-                    + "where flora.nombreComun = '" +nombre+"'";
+            query=  "SELECT * " +
+                    "FROM flora " +
+                    "INNER JOIN taxonomia " +
+                    "ON flora.taxonomiaID = taxonomia.taxonomiaID";
+                    + "WHERE flora.nombreComun = '" +nombre+"'";
             ResultSet rs=s.executeQuery(query);
             
                    
