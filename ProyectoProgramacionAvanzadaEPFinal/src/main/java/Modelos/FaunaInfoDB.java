@@ -15,5 +15,5 @@ public interface FaunaInfoDB {
     public ArrayList<FaunaInfo> listaFauna = new ArrayList<>();
     
     public ArrayList<FaunaInfo> Leer(Connection link);
-    public FloraInfo Buscar(Connection link, String nombreComun);
+    public FaunaInfo Buscar(Connection link, String nombreComun);
 }
