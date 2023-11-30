@@ -7,7 +7,6 @@ package Controladores;
 
 import Modelos.NoticiaDB;
 import Modelos.Noticia;
-import Modelos.Usuario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class NoticiaG implements NoticiaDB{
     public String query;
-    public ArrayList<Modelos.Informacion> Leer(Connection link){
+    public ArrayList<Noticia> Leer(Connection link){
         try{
             Statement s = link.createStatement();
             query=  "select *"
@@ -45,6 +44,7 @@ public class NoticiaG implements NoticiaDB{
         return null;
     }
 
+    @Override
     public boolean Crear(Connection link, Noticia noticia) {
         try{
             Statement s = link.createStatement();
@@ -59,6 +59,7 @@ public class NoticiaG implements NoticiaDB{
         return false;
     }
 
+    @Override
     public boolean Actualizar(Connection link, Noticia noticia ) {
         try{
             Statement s = link.createStatement();
@@ -75,6 +76,7 @@ public class NoticiaG implements NoticiaDB{
                
     }
 
+    @Override
     public Noticia Buscar(Connection link, int id) {
         Noticia noticia=new Noticia();
         try {
@@ -101,6 +103,7 @@ public class NoticiaG implements NoticiaDB{
         return null;
     }        
 
+    @Override
     public boolean Eliminar(Connection link, int id) {
            try {
             //aqui hay que buscar si se encuentra 
