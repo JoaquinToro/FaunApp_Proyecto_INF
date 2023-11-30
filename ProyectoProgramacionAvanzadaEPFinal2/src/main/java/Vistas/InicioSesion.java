@@ -176,7 +176,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 
                 conexion.CerrarConexion();
                 
-                MenuPrincipal ventana=new MenuPrincipal(usuarioActual);
+                MenuPrincipal ventana=new MenuPrincipal();
                 ventana.setVisible(true);
                 this.setVisible(false);
                 setDefaultCloseOperation(this.EXIT_ON_CLOSE);
