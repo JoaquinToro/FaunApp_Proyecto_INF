@@ -20,29 +20,39 @@ import java.util.logging.Logger;
  */
 public class NoticiaG implements NoticiaDB{
     public String query;
-    public ArrayList<Noticia> Leer(Connection link){
-        try{
-            Statement s = link.createStatement();
-            query=  "select *"
-                    + "from noticia"
-                    + "inner join informacion"
-                    + "on noticia.informacionID = informacion.informacionID";
-            ResultSet rs=s.executeQuery(query);
-            while (rs.next()){
-                Noticia noticia = new Noticia();
-                noticia.setNoticiaID(Integer.parseInt(rs.getString("noticiaID")));
-                noticia.setAutor(rs.getString("autor"));
-                noticia.setTitulo(rs.getString("titulo"));
-                noticia.setFecha(rs.getDate("fecha"));
-                listaNoticias.add(noticia);            
 
+    /**
+     *
+     * @param link
+     * @return
+     */
+    @Override
+    public ArrayList<Noticia> Leer(Connection link) {
+    try {
+        Statement s = link.createStatement();
+
+        query = "SELECT * " +
+                "FROM noticia " +
+                "INNER JOIN informacion " +
+                "ON noticia.informacionID = informacion.informacionID";
+
+        ResultSet rs = s.executeQuery(query);
+        while (rs.next()) {
+            Noticia noticia = new Noticia();
+            noticia.setNoticiaID(Integer.parseInt(rs.getString("noticiaID")));
+            noticia.setAutor(rs.getString("autor"));
+            noticia.setTitulo(rs.getString("titulo"));
+            noticia.setFecha(rs.getDate("fecha"));
+            noticia.setTexto_Principal(rs.getString("textoPrincipal"));
+            listaNoticias.add(noticia);
         }
+
         return listaNoticias;
-        }catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    } catch (SQLException ex) {
+        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return null;
+}
 
     @Override
     public boolean Crear(Connection link, Noticia noticia) {
