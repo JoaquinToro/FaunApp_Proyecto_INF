@@ -24,7 +24,7 @@ public class UsuarioG implements UsuarioDB{
 
         try{
             Statement s = link.createStatement();
-            query="SELECT * FROM Usuario";
+            query="SELECT * FROM usuario";
             ResultSet rs=s.executeQuery(query);
             while (rs.next()){
                Usuario usuario = new Usuario();
@@ -48,7 +48,7 @@ public class UsuarioG implements UsuarioDB{
         Usuario usuario=new Usuario();
         try {
             Statement s = link.createStatement();
-            query="select * from Usuario where nombreDeUsuario='"+nombre+"'";
+            query="SELECT * FROM usuario WHERE nombreDeUsuario='"+nombre+"'";
             ResultSet rs=s.executeQuery(query);
             
                    
@@ -58,6 +58,7 @@ public class UsuarioG implements UsuarioDB{
                usuario.setPassword(rs.getString("password"));
                usuario.setGenero(rs.getString("genero"));
                usuario.setEdad(rs.getString("edad"));
+               
                 
             }
             return usuario;
@@ -71,21 +72,73 @@ public class UsuarioG implements UsuarioDB{
 
     @Override
     public boolean Crear(Connection link, Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            Statement s = link.createStatement();
+            query="INSERT INTO usuario(nombreDeUsuario,password,edad,genero)VALUES('"+usuario.getNombreDeUsuario()+"','"+usuario.getPassword()+"','"+usuario.getEdad()+"','"+usuario.getGenero()+"')";
+            s.executeUpdate(query);
+            return true;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 
     @Override
     public boolean Actualizar(Connection link, Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            Statement s = link.createStatement();
+            query="UPDATE usuario SET nombreDeUsuario='"+usuario.getNombreDeUsuario()+"',password='"+usuario.getPassword()+"',edad='"+usuario.getEdad()+"',genero='"+usuario.getGenero()+"' WHERE usuarioID='"+usuario.getId()+"'";
+            s.executeUpdate(query);
+            return true;
+            
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
-
     @Override
     public boolean Eliminar(Connection link, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           try {
+            //aqui hay que buscar si se encuentra 
+            
+            Statement s = link.createStatement();
+            query="DELETE * usuario WHERE usuarioID="+id+"";
+            ResultSet rs=s.executeQuery(query);
+            
+            return true;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;        
     }
 
     @Override
     public Usuario Buscar(Connection link, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Usuario usuario=new Usuario();
+        try {
+            Statement s = link.createStatement();
+            query="SELECT * FROM usuario WHERE usuarioID="+id+"";
+            ResultSet rs=s.executeQuery(query);
+   
+            while (rs.next()){
+               usuario.setNombreDeUsuario(rs.getString("nombreDeUsuario"));
+               usuario.setGenero(rs.getString("genero"));
+               usuario.setPassword(rs.getString("password"));
+               usuario.setEdad(rs.getString("edad"));
+
+            }
+            return usuario;
+  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;        
     }
 }
