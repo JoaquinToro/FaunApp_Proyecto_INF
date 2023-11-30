@@ -25,10 +25,11 @@ public class TipsG implements TipsDB{
     public ArrayList<Tips> Leer(Connection link){
         try{
             Statement s = link.createStatement();
-            query=  "select *"
-                    + "from tips"
-                    + "inner join informacion"
-                    + "on tips.informacionID = informacion.informacionID";
+            query=  "SELECT * " +
+                    "FROM tips " +
+                    "INNER JOIN informacion " +
+                    "ON tips.informacionID = informacion.informacionID";
+            
             ResultSet rs=s.executeQuery(query);
             while (rs.next()){
                 Tips tip = new Tips();
