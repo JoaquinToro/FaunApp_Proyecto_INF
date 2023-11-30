@@ -5,8 +5,11 @@
 package Vistas;
 
 import Controladores.Conexion;
-import Controladores.Usuario;
+import Modelos.Usuario;
+import Controladores.UsuarioG;
+import java.awt.Color;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -21,11 +24,20 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioSesion
      */
+    UsuarioG connUsuario = new UsuarioG();
+    Conexion conexion =new Conexion();
+    Connection link=conexion.Conectar();
+    
+    ArrayList<Usuario>listaUsuarios = connUsuario.Leer(link);
+    
     ImageIcon imageLirio1 = new ImageIcon("Lirio_Del_Valle_1.png");
     ImageIcon imageLirio2 = new ImageIcon("Lirio_Del_Valle_2.png");
     
     public InicioSesion() {
         initComponents();
+        lblMensajeIncorrecto.setForeground(Color.red);
+        lblMensajeIncorrecto.setVisible(false);
+        
         lblLirio1.setIcon(imageLirio1);
         lblLirio2.setIcon(imageLirio2);
          //conectarnos a DB
@@ -47,13 +59,13 @@ public class InicioSesion extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         javax.swing.JLabel Usuario = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblClave = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        lblMensaje = new javax.swing.JLabel();
         txtClave = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        lblPrincipal = new javax.swing.JLabel();
         lblLirio1 = new javax.swing.JLabel();
         lblLirio2 = new javax.swing.JLabel();
+        lblMensajeIncorrecto = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -68,7 +80,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
         Usuario.setText("Usuario");
 
-        jLabel2.setText("Clave");
+        lblClave.setText("Clave");
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,8 +88,10 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("MS UI Gothic", 0, 36)); // NOI18N
-        jLabel1.setText("FaunApp");
+        lblPrincipal.setFont(new java.awt.Font("MS UI Gothic", 0, 36)); // NOI18N
+        lblPrincipal.setText("FaunApp");
+
+        lblMensajeIncorrecto.setText("Datos incorrectos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,9 +103,6 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblMensaje))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(159, 159, 159)
                                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,7 +110,7 @@ public class InicioSesion extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
+                                    .addComponent(lblClave)
                                     .addComponent(Usuario))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,8 +119,12 @@ public class InicioSesion extends javax.swing.JFrame {
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)))
+                        .addComponent(lblPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(lblMensajeIncorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(lblLirio2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -121,9 +136,8 @@ public class InicioSesion extends javax.swing.JFrame {
                     .addComponent(lblLirio1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLirio2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMensaje)
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel1)
+                        .addComponent(lblPrincipal)
                         .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -133,13 +147,15 @@ public class InicioSesion extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Usuario)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel2)))
-                        .addGap(72, 72, 72)
+                                .addComponent(lblClave)))
+                        .addGap(32, 32, 32)
+                        .addComponent(lblMensajeIncorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAceptar)))
                 .addGap(9, 9, 9))
         );
 
-        jLabel1.getAccessibleContext().setAccessibleName("lblFaunApp");
+        lblPrincipal.getAccessibleContext().setAccessibleName("lblFaunApp");
         lblLirio1.getAccessibleContext().setAccessibleName("lblLirio1");
         lblLirio2.getAccessibleContext().setAccessibleName("lblLirio2");
 
@@ -150,19 +166,23 @@ public class InicioSesion extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //consulta
-        Conexion conexion=new Conexion();
-        Connection link=conexion.Conectar();
-        Usuario usuario=new Usuario();
-        if(usuario.Leer(link, txtUsuario.getText(), txtClave.getText())){
-            conexion.CerrarConexion();
-            MenuPrincipal ventana=new MenuPrincipal();
-            ventana.setVisible(true);
-            this.setVisible(false);
-            setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        }else{
-            lblMensaje.setText("Usuario o pasword incorrectos");
-            conexion.CerrarConexion();
+        
+        Usuario usuarioActual;
+        for(int i=0;i<listaUsuarios.size();i++){
+            if(listaUsuarios.get(i).getNombreDeUsuario().equals(txtUsuario.getText())
+               && listaUsuarios.get(i).getPassword().equals(txtClave.getText())){
+                usuarioActual = listaUsuarios.get(i);
+                usuarioActual.abrirSesion();
+                
+                conexion.CerrarConexion();
+                
+                MenuPrincipal ventana=new MenuPrincipal(usuarioActual);
+                ventana.setVisible(true);
+                this.setVisible(false);
+                setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+            }
         }
+        lblMensajeIncorrecto.setVisible(true);
         
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -209,11 +229,11 @@ public class InicioSesion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblClave;
     private javax.swing.JLabel lblLirio1;
     private javax.swing.JLabel lblLirio2;
-    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblMensajeIncorrecto;
+    private javax.swing.JLabel lblPrincipal;
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
