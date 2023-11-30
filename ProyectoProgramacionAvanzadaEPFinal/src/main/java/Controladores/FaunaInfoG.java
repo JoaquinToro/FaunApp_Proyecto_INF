@@ -6,6 +6,7 @@ package Controladores;
 
 import Modelos.FaunaInfo;
 import Modelos.FaunaInfoDB;
+import Modelos.FloraInfo;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class FaunaInfoG implements FaunaInfoDB{
     public String query;
 
     @Override
-    public ArrayList<Modelos.FloraInfo> Leer(Connection link){
+    public ArrayList<FaunaInfo> Leer(Connection link){
         try{
             Statement s = link.createStatement();
             query=  "select *"
