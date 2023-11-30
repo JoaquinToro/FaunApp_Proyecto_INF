@@ -17,6 +17,6 @@ public interface NoticiaDB {
     public ArrayList<Noticia> Leer(Connection link);
     public boolean Crear(Connection link, Noticia noticia);
     public boolean Actualizar(Connection link, Noticia noticia);
-    public boolean Eliminar(Connection link, String rut);
-    public Noticia Buscar(Connection link, String rut);
+    public boolean Eliminar(Connection link, int noticiaID);
+    public Noticia Buscar(Connection link, int noticiaID);
 }
